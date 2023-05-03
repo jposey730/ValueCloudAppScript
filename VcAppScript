@@ -1,0 +1,99 @@
+function generateDeck() {
+  var templateId = "1giaVBASGd_LHhzWm_zblF7FEFWuCdjfV3N3tZoE-2Cw";
+  const spreadSheetId = SpreadsheetApp.getActive().getId();
+  //const spreadSheetId = "1bZssb3597Q1vR0860LfUQzOBTMS37sGn59MhYKaa3q0";
+  const chartSheet = SpreadsheetApp.openById(spreadSheetId).getSheetByName('CHARTS');
+  var companyName = chartSheet.getRange(1,16).getValue();
+  var template = DriveApp.getFileById(templateId);
+  var copy = template.makeCopy();
+  var copyId = copy.getId();
+  copy.setName(companyName);
+  var copyFile = SlidesApp.openById(copyId);
+  var templateSlides = copyFile.getSlides();
+  templateSlides[0].replaceAllText('{{CLIENT}}',companyName);
+  updateSlide(0,1,7,templateSlides,copyFile,chartSheet);
+  updateSlide(3,2,9,templateSlides,copyFile,chartSheet);
+  setText(chartSheet,copyFile,14, 51, 9, '{{N51}}', false);
+  setText(chartSheet,copyFile,15, 51, 9, '{{O51}}', false);
+  setText(chartSheet,copyFile,16, 51, 9, '{{P51}}', 'percent');
+  setText(chartSheet,copyFile,17, 51, 9, '{{Q51}}', 'percent');
+  setText(chartSheet,copyFile,18, 51, 9, '{{R51}}', 'money');
+  setText(chartSheet,copyFile,15, 55, 9, '{{O55}}', false);
+  setText(chartSheet,copyFile,16, 55, 9, '{{P55}}', false);
+  setText(chartSheet,copyFile,17, 55, 9, '{{Q55}}', false);
+  setText(chartSheet,copyFile,18, 55, 9, '{{R55}}', 'money');
+  updateSlide(4,5,10,templateSlides,copyFile,chartSheet);
+  setText(chartSheet,copyFile,14, 76, 10, '{{N76}}', false);
+  setText(chartSheet,copyFile,15, 76, 10, '{{O76}}', false);
+  setText(chartSheet,copyFile,16, 76, 10, '{{P76}}', 'percent');
+  setText(chartSheet,copyFile,17, 76, 10, '{{Q76}}', 'money');
+  setText(chartSheet,copyFile,15, 81, 10, '{{O81}}', false);
+  setText(chartSheet,copyFile,16, 81, 10, '{{P81}}', false);
+  setText(chartSheet,copyFile,17, 81, 10, '{{Q81}}', 'money');
+  updateSlide(6,7,11,templateSlides,copyFile,chartSheet);
+  setText(chartSheet,copyFile,14, 102, 11, '{{N102}}', false);
+  setText(chartSheet,copyFile,15, 102, 11, '{{O102}}', false);
+  setText(chartSheet,copyFile,16, 102, 11, '{{P102}}', 'percent');
+  setText(chartSheet,copyFile,17, 102, 11, '{{Q102}}', 'money');
+  setText(chartSheet,copyFile,18, 102, 11, '{{R102}}', 'percent');
+  setText(chartSheet,copyFile,16, 108, 11, '{{P108}}', false);
+  setText(chartSheet,copyFile,17, 108, 11, '{{Q108}}', 'money');
+  setText(chartSheet,copyFile,18, 108, 11, '{{R108}}', 'money');
+  updateSlide(14,15,12,templateSlides,copyFile,chartSheet);
+  setText(chartSheet,copyFile,14, 128, 12, '{{N128}}', false);
+  setText(chartSheet,copyFile,15, 128, 12, '{{O128}}', false);
+  setText(chartSheet,copyFile,16, 128, 12, '{{P128}}', 'percent');
+  setText(chartSheet,copyFile,17, 128, 12, '{{Q128}}', 'money');
+  setText(chartSheet,copyFile,19, 128, 12, '{{S128}}', false);
+  setText(chartSheet,copyFile,20, 128, 12, '{{T128}}', false);
+  setText(chartSheet,copyFile,21, 128, 12, '{{U128}}', 'percent');
+  setText(chartSheet,copyFile,22, 128, 12, '{{V128}}', 'money');
+  setText(chartSheet,copyFile,16, 133, 12, '{{P133}}', false);
+  setText(chartSheet,copyFile,17, 133, 12, '{{Q133}}', 'money');
+  setText(chartSheet,copyFile,21, 133, 12, '{{U133}}', false);
+  setText(chartSheet,copyFile,22, 133, 12, '{{V133}}', 'money');
+  setText(chartSheet,copyFile,22, 136, 12, '{{V136}}', 'money');
+  updateSlide(9,8,13,templateSlides,copyFile,chartSheet);
+  setText(chartSheet,copyFile,14, 154, 13, '{{N154}}', false);
+  setText(chartSheet,copyFile,15, 154, 13, '{{O154}}', false);
+  setText(chartSheet,copyFile,16, 154, 13, '{{P154}}', false);
+  setText(chartSheet,copyFile,17, 154, 13, '{{Q154}}', false);
+  setText(chartSheet,copyFile,19, 154, 13, '{{S154}}', false);
+  setText(chartSheet,copyFile,20, 154, 13, '{{T154}}', 'money');
+  setText(chartSheet,copyFile,15, 158, 13, '{{O158}}', false);
+  setText(chartSheet,copyFile,17, 158, 13, '{{Q158}}', false);
+  setText(chartSheet,copyFile,20, 158, 13, '{{T158}}', 'money');
+  updateSlide(10,11,14,templateSlides,copyFile,chartSheet);
+  setText(chartSheet,copyFile,14, 178, 14, '{{N178}}', false);
+  setText(chartSheet,copyFile,15, 178, 14, '{{O178}}', 'percent');
+  setText(chartSheet,copyFile,16, 178, 14, '{{P178}}', 'percent');
+  setText(chartSheet,copyFile,18, 178, 14, '{{R178}}', 'money');
+  setText(chartSheet,copyFile,15, 182, 14, '{{O182}}', false);
+  setText(chartSheet,copyFile,17, 182, 14, '{{Q182}}', false);
+  setText(chartSheet,copyFile,19, 183, 14, '{{S183}}', 'money');
+  setText(chartSheet,copyFile,15, 184, 14, '{{O184}}', false);
+}
+
+function updateSlide(chart1, chart2, slide, tempSlides, cFile, cSheet) {
+  var updateSlide = tempSlides[slide];
+  var chartOne = cSheet.getCharts()[chart1];
+  var chartTwo = cSheet.getCharts()[chart2];
+  var chartsOnSlide = cFile.getSlides()[slide].getSheetsCharts();
+  updateSlide.insertSheetsChart(chartOne,chartsOnSlide[0].getLeft(),chartsOnSlide[0].getTop(),chartsOnSlide[0].getWidth(),chartsOnSlide[0].getHeight());
+    updateSlide.insertSheetsChart(chartTwo,chartsOnSlide[1].getLeft(),chartsOnSlide[1].getTop(),chartsOnSlide[1].getWidth(),chartsOnSlide[1].getHeight());
+    chartsOnSlide[0].remove();
+  chartsOnSlide[1].remove();
+}
+
+function setText(textSheet, tempFiles, column, row, slide, repText, numType) {
+  var cellValue = textSheet.getRange(row, column).getValue();
+  Logger.log(cellValue);
+  if (numType == 'percent') {
+    tempFiles.getSlides()[slide].replaceAllText(repText,Number(cellValue).toLocaleString("en-US", { style: "percent"}));
+  } else if(numType == 'money') {
+    tempFiles.getSlides()[slide].replaceAllText(repText,Number(cellValue).toLocaleString("en-US", { style:"currency", currency:"USD", maximumFractionDigits: 2}));
+  } else {
+    tempFiles.getSlides()[slide].replaceAllText(repText,Number(cellValue).toLocaleString("en-US", { style:"decimal", maximumFractionDigits: 1}));
+  }
+}
+
