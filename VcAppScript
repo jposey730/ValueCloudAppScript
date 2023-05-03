@@ -1,7 +1,7 @@
 function generateDeck() {
-  var templateId = "1giaVBASGd_LHhzWm_zblF7FEFWuCdjfV3N3tZoE-2Cw";
+  var templateId = "XXXXXXXXXIdOfTemplateSlides";
   const spreadSheetId = SpreadsheetApp.getActive().getId();
-  //const spreadSheetId = "1bZssb3597Q1vR0860LfUQzOBTMS37sGn59MhYKaa3q0";
+  //const spreadSheetId = "XXXXXXXXIdofSpreadSheetForTesting";
   const chartSheet = SpreadsheetApp.openById(spreadSheetId).getSheetByName('CHARTS');
   var companyName = chartSheet.getRange(1,16).getValue();
   var template = DriveApp.getFileById(templateId);
@@ -90,7 +90,7 @@ function setText(textSheet, tempFiles, column, row, slide, repText, numType) {
   Logger.log(cellValue);
   if (numType == 'percent') {
     tempFiles.getSlides()[slide].replaceAllText(repText,Number(cellValue).toLocaleString("en-US", { style: "percent"}));
-  } else if(numType == 'money') {
+  } else if (numType == 'money') {
     tempFiles.getSlides()[slide].replaceAllText(repText,Number(cellValue).toLocaleString("en-US", { style:"currency", currency:"USD", maximumFractionDigits: 2}));
   } else {
     tempFiles.getSlides()[slide].replaceAllText(repText,Number(cellValue).toLocaleString("en-US", { style:"decimal", maximumFractionDigits: 1}));
